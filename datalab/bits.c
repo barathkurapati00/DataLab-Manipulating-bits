@@ -211,7 +211,17 @@ int bitNor(int x, int y) {
  *  Rating: 2
  */
 int byteSwap(int x, int n, int m) {
-    return 2;
+   //extract bits using shifting
+   //clear oiriginal byte psoitions
+   //swap and put bytes back in place
+   int n_shift = n << 3; //shift n by 8 to get position
+   int m_shift = m <<3; //shift m by 8 to get position
+   int n_byte = (x >>n_shift) & 0xFF; //Extract the nth byte
+   int m_byte = (x>> m_shift) &0xFF; //Extract  th mth byte
+   int mask = (0xFF << n_shift) | (0xFF << m_shift); //clear positions
+   x &= ~mask; //clear bytes
+   x |= (n_byte << m_shift) | (m_byte << n_shift); // Swap and put back
+    return x;
 }
 /*
  * ezThreeFourths - multiplies by 3/4 rounding toward 0,
