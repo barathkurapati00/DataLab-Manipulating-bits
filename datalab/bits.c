@@ -254,8 +254,18 @@ int ezThreeFourths(int x) {
  *   Rating: 2
  */
 unsigned float_abs(unsigned uf) {
-  return 2;
+   //clear sign bit to get absoliute value
+   //if value is NaN the return original input
+   unsigned mask = 0x7FFFFFFF; //use mask to remove the sign bit
+   unsigned abs_val = uf & mask;
+   
+   if (abs_val > 0x7F800000) { //check exponent all ones, fraction nonzero
+        return uf;
+    }
+    
+    return abs_val;
 }
+
 /* 
  * float_neg - Return bit-level equivalent of expression -f for
  *   floating point argument f.
