@@ -235,7 +235,12 @@ int byteSwap(int x, int n, int m) {
  *   Rating: 3
  */
 int ezThreeFourths(int x) {
-  return 2;
+   //mult by 3 using ashifting
+   //use bias to round to 0 when div by 4
+   int mult = (x << 1) + x;  //x times 3
+   int bias = (mult >>31) &3; // Bias for negative numbers
+
+  return (mult + bias) >> 2;
 }
 /* 
  * float_abs - Return bit-level equivalent of absolute value of f for
