@@ -197,7 +197,9 @@ int bitCount(int x) {
  *   Rating: 1
  */
 int bitNor(int x, int y) {
-  return 2;
+   //using de morgan's theorem from textbook
+
+  return ~x & ~y;
 }
 /* 
  * byteSwap - swaps the nth byte and the mth byte
