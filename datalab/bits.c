@@ -300,8 +300,13 @@ unsigned float_neg(unsigned uf) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+   //check if x is in nrnage by using subtarction
+   //- if x - 0x30 >= 0 and 0x39 - x >= 0, it is an ASCII digit.
+   int lower_bound = x +(~0x30 +1); //x - 0x30
+   int upper_bound = 0x39+ (~x+ 1); //0x39- x
+   return !(lower_bound >>31) & !(upper_bound>>31);
 }
+
 /* 
  * isPositive - return 1 if x > 0, return 0 otherwise 
  *   Example: isPositive(-1) = 0.
@@ -310,5 +315,7 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int isPositive(int x) {
-  return 2;
+   //x is positive if sign bit is zero and x is nonzero
+   //get sign bit by shifting 31
+  return !(x >> 31) & !!x;
 }
