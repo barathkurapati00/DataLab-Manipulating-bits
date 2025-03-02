@@ -278,8 +278,18 @@ unsigned float_abs(unsigned uf) {
  *   Rating: 2
  */
 unsigned float_neg(unsigned uf) {
- return 2;
+   //flip sign biut to negative
+   //if value is NaN return original inpiut
+   unsigned mask = 0x7FFFFFFF;
+   unsigned abs_val = uf & mask;
+
+   if (abs_val > 0x7F800000) { // NaN check
+        return uf;
+    }
+    
+    return uf ^ 0x80000000; // Flip sign bit
 }
+
 /* 
  * isAsciiDigit - return 1 if 0x30 <= x <= 0x39 (ASCII codes for characters '0' to '9')
  *   Example: isAsciiDigit(0x35) = 1.
